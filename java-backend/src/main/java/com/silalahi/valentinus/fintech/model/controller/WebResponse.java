@@ -3,6 +3,8 @@ package com.silalahi.valentinus.fintech.model.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import org.springframework.http.HttpStatus;
 
 import com.silalahi.valentinus.fintech.model.paging.PagingResponse;
@@ -41,13 +43,25 @@ public class WebResponse<T> {
 				.build();
 	}
 	
-	public static <T> WebResponse<T> badRequest(T data, Map<String, List<String>> errors){
+	public static <T> WebResponse<T> badRequest(Map<String, List<String>> errors){
 		return WebResponse.<T>builder()
 				.status(HttpStatus.BAD_REQUEST.getReasonPhrase())
 				.code(HttpStatus.BAD_REQUEST.value())
-				.data(data)
 				.errors(errors)
 				.build();
 	}
+	
+	public static <T> WebResponse<T> status(HttpStatus status) {
+        return WebResponse.status(null, status);
+    }
+
+    public static <T> WebResponse<T> status(@Nullable T data, HttpStatus status) {
+        return WebResponse.<T>builder()
+            .status(status.getReasonPhrase())
+            .code(status.value())
+            .data(data)
+            .build();
+    }
+
 	
 }
