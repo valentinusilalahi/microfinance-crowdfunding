@@ -4,13 +4,22 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import com.silalahi.valentinus.fintech.util.ValidationUtils;
+
 import lombok.Getter;
 
 public class ValidationException extends AppException {
 	@Getter
-	private Set<ConstraintViolation<Object>> constraintViolations;
+	private Set<ConstraintViolation<?>> constraintViolations;
 
-	public ValidationException(Set<ConstraintViolation<Object>> constraintViolations) {
+	@SuppressWarnings("unchecked")
+	public ValidationException(Set constraintViolations) {
+		this(ValidationUtils.errors(constraintViolations).toString(), constraintViolations);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ValidationException(String message, Set constraintViolations) {
+		super(message);
 		this.constraintViolations = constraintViolations;
 	}
 

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class ReactiveUtil {
+public class ReactiveUtils {
 	public static <T> Mono<T> mono(Supplier<T> supplier) {
 		return Mono.fromSupplier(supplier);
 	}
