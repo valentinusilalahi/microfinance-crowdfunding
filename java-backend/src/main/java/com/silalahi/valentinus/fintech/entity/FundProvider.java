@@ -1,27 +1,30 @@
 package com.silalahi.valentinus.fintech.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static lombok.AccessLevel.PACKAGE;
-
 @Entity
+@Table(name = "fund_provider")
+@EntityListeners({ AuditingEntityListener.class })
 @Data
 @Builder
-@AllArgsConstructor(access = PACKAGE)
+@AllArgsConstructor
 @NoArgsConstructor
 public class FundProvider {
 
@@ -30,27 +33,27 @@ public class FundProvider {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-	@NotNull
-	@NotEmpty
 	private String salutation;
 
-	@NotNull
-	@NotEmpty
 	private String fullname;
 
-	@NotNull
-	@NotEmpty
 	@Column(unique = true)
 	private String email;
 
-	@NotNull
-	@NotEmpty
 	private String phone;
 
-	@NotNull
-	@NotEmpty
 	private String password;
 
-	private Date createDate;
+	@CreatedDate
+	private Long createDate;
+
+	@CreatedBy
+	private String createdBy;
+
+	@LastModifiedDate
+	private Long lastModifiedDate;
+
+	@LastModifiedBy
+	private String lastModifiedBy;
 
 }
