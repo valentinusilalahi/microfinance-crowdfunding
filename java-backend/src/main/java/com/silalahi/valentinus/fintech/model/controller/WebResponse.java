@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import org.springframework.http.HttpStatus;
 
-import com.silalahi.valentinus.fintech.model.paging.PagingResponse;
+import com.silalahi.valentinus.fintech.model.paging.Paging;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class WebResponse<T> {
 	private String status;
 	private T data;
 	private Map<String, List<String>> errors;
-	private PagingResponse paging;
+	private Paging paging;
 	
 	public static <T> WebResponse<T> ok(T data){
 		return WebResponse.<T>builder()
@@ -34,7 +34,7 @@ public class WebResponse<T> {
 				.build();
 	}
 	
-	public static <T> WebResponse<T> ok(T data, PagingResponse paging){
+	public static <T> WebResponse<T> ok(T data, Paging paging){
 		return WebResponse.<T>builder()
 				.status(HttpStatus.OK.getReasonPhrase())
 				.code(HttpStatus.OK.value())

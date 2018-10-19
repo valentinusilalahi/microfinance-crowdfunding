@@ -1,4 +1,4 @@
-package com.silalahi.valentinus.fintech.model.paging;
+package com.silalahi.valentinus.fintech.model.command.index;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagingSort {
-
-	private String field;
-	private PagingDirection direction;
+public class IndexCommandResponse {
+	
+	private String hello;
 
 }
